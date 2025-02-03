@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\",
+  "WorkspaceRootPath": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\origin-repo\\mcns_standalone\\03.ui\\xtrareport1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\mcns_standalone\\03.ui\\xtrareport1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\xtrareport1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.ui\\xtrareport1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.ui\\xtrareport1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\xtrareport1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -32,11 +32,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "XtraReport1.cs",
-              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs",
               "RelativeDocumentMoniker": "03.UI\\XtraReport1.cs",
-              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs",
+              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs",
               "RelativeToolTip": "03.UI\\XtraReport1.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T00:39:00.846Z",
               "EditorCaption": ""
@@ -45,7 +45,7 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "XtraReport1.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs",
               "RelativeDocumentMoniker": "03.UI\\XtraReport1.cs",
               "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\01. ProtoType\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "..\\..\\01. ProtoType\\MCNS_STANDALONE\\03.UI\\XtraReport1.cs [\uB514\uC790\uC778]",
@@ -56,9 +56,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "FormConceptSheet.cs",
-              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
               "RelativeDocumentMoniker": "03.UI\\FormConceptSheet.cs",
-              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
+              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
               "RelativeToolTip": "03.UI\\FormConceptSheet.cs",
               "ViewState": "AgIAAAADAAAAAAAAAAA9wAcDAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -68,7 +68,7 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "FormConceptSheet.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\origin-repo\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
               "RelativeDocumentMoniker": "03.UI\\FormConceptSheet.cs",
               "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\01. ProtoType\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "..\\..\\01. ProtoType\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs [\uB514\uC790\uC778]",

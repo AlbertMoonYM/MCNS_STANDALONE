@@ -22,7 +22,7 @@ namespace MCNS_STANDALONE._03.UI
         {
             InitializeComponent();
 
-
+            //test git
             string[] keys = CS_StaticUnit.dicCtrlMod.Keys.ToArray();
 
             Control[] prjCtrls = CS_StaticUnit.dicCtrlMod[keys[0]];
