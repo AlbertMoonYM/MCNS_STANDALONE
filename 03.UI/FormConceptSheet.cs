@@ -51,7 +51,8 @@ namespace MCNS_STANDALONE
         McnsSchemGenEngine.Controls.McnsControl mcnsControl = new McnsSchemGenEngine.Controls.McnsControl();
 
         //전역 변수 설정
-        private DataTable excelDt = new DataTable();
+        private DataTable excelIoDt = new DataTable();
+        private DataTable excelMccbDt = new DataTable();
 
         public FormConceptSheet()
         {
@@ -67,6 +68,7 @@ namespace MCNS_STANDALONE
             ControlFormFunction();
             ControlPlcFunction();
             LoadIoFromExcel();
+            LoadMccbFromExcel();
             //ActivateEplan();
 
             UpdateComboBoxItemList();
@@ -1846,7 +1848,7 @@ namespace MCNS_STANDALONE
                     string userText = cbMODfullName.Text; // 실제 입력값으로 변경
                     string[] userTextParts = userText.Split('-'); // 텍스트를 '-'로 분리하여 배열로 저장
 
-                    DataTable tempDt = excelDt.Copy();
+                    DataTable tempDt = excelIoDt.Copy();
 
                     // 공통 시그널 항목 추가
                     foreach (var row in tempDt.AsEnumerable().Where(row => row.Field<string>("구분") == "공통"))
@@ -2285,8 +2287,8 @@ namespace MCNS_STANDALONE
         private void LoadIoFromExcel()
         {
             // DataTable 초기화 (데이터 및 컬럼 제거)
-            excelDt.Clear();
-            excelDt.Columns.Clear(); // 컬럼도 제거하여 중복 방지
+            excelIoDt.Clear();
+            excelIoDt.Columns.Clear(); // 컬럼도 제거하여 중복 방지
 
             try
             {
@@ -2313,41 +2315,41 @@ namespace MCNS_STANDALONE
                             // 첫 번째 행은 컬럼 이름으로 사용
                             foreach (var cell in row.Cells())
                             {
-                                excelDt.Columns.Add(cell.Value.ToString()); // 컬럼 추가
+                                excelIoDt.Columns.Add(cell.Value.ToString()); // 컬럼 추가
                             }
                             firstRow = false;
                         }
                         else
                         {
                             // 데이터 행 처리
-                            DataRow dataRow = excelDt.NewRow();
+                            DataRow dataRow = excelIoDt.NewRow();
                             int i = 0;
                             foreach (var cell in row.Cells())
                             {
                                 string cellValue = cell.Value.ToString();
 
                                 // 공란 필드가 있는 경우 이전 행의 값을 가져와 채움
-                                if (excelDt.Columns[i].ColumnName == "PARTS")
+                                if (excelIoDt.Columns[i].ColumnName == "PARTS")
                                 {
                                     dataRow[i] = string.IsNullOrWhiteSpace(cellValue) ? previousParts : cellValue;
                                     previousParts = dataRow[i].ToString(); // 현재 값 저장
                                 }
-                                else if (excelDt.Columns[i].ColumnName == "LOCATION")
+                                else if (excelIoDt.Columns[i].ColumnName == "LOCATION")
                                 {
                                     dataRow[i] = string.IsNullOrWhiteSpace(cellValue) ? previousLocation : cellValue;
                                     previousLocation = dataRow[i].ToString(); // 현재 값 저장
                                 }
-                                else if (excelDt.Columns[i].ColumnName == "DT")
+                                else if (excelIoDt.Columns[i].ColumnName == "DT")
                                 {
                                     dataRow[i] = string.IsNullOrWhiteSpace(cellValue) ? previousDt : cellValue;
                                     previousDt = dataRow[i].ToString(); // 현재 값 저장
                                 }
-                                else if (excelDt.Columns[i].ColumnName == "TYPE1")
+                                else if (excelIoDt.Columns[i].ColumnName == "TYPE1")
                                 {
                                     dataRow[i] = string.IsNullOrWhiteSpace(cellValue) ? previousType1 : cellValue;
                                     previousType1 = dataRow[i].ToString(); // 현재 값 저장
                                 }
-                                else if (excelDt.Columns[i].ColumnName == "TYPE2")
+                                else if (excelIoDt.Columns[i].ColumnName == "TYPE2")
                                 {
                                     dataRow[i] = string.IsNullOrWhiteSpace(cellValue) ? previousType2 : cellValue;
                                     previousType2 = dataRow[i].ToString(); // 현재 값 저장
@@ -2362,7 +2364,7 @@ namespace MCNS_STANDALONE
                             }
 
                             // DataTable에 데이터 추가
-                            excelDt.Rows.Add(dataRow);
+                            excelIoDt.Rows.Add(dataRow);
                         }
                     }
                 }
@@ -2373,6 +2375,54 @@ namespace MCNS_STANDALONE
 
             }
         }
+        private void LoadMccbFromExcel()
+        {
+            // DataTable 초기화 (데이터 및 컬럼 제거)
+            excelMccbDt.Clear();
+            excelMccbDt.Columns.Clear(); // 컬럼도 제거하여 중복 방지
+
+            try
+            {
+                // Excel 파일 열기
+                using (var workbook = new XLWorkbook(CS_PathData.MccbFilePath))
+                {
+                    foreach (var worksheet in workbook.Worksheets) // 모든 워크시트 반복
+                    {
+                        // 첫 번째 행에서 컬럼명 읽기 (중복 컬럼명 방지)
+                        if (excelMccbDt.Columns.Count == 0)
+                        {
+                            var firstRow = worksheet.FirstRowUsed();
+                            foreach (var cell in firstRow.CellsUsed())
+                            {
+                                excelMccbDt.Columns.Add(cell.Value.ToString()); // 컬럼 추가
+                            }
+                        }
+
+                        // 데이터 읽기 (첫 번째 행 이후부터)
+                        foreach (var row in worksheet.RowsUsed().Skip(1))
+                        {
+                            var dataRow = excelMccbDt.NewRow();
+                            int columnIndex = 0;
+
+                            foreach (var cell in row.CellsUsed())
+                            {
+                                if (columnIndex < excelMccbDt.Columns.Count)
+                                    dataRow[columnIndex] = cell.Value;
+                                columnIndex++;
+                            }
+
+                            excelMccbDt.Rows.Add(dataRow);
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         /*
         private void ActivateEplan()
         {
@@ -2606,12 +2656,7 @@ namespace MCNS_STANDALONE
         {
             simpleButton1.Click += (o, e) => 
             {
-                string test = "";
-
-                foreach(XtraTabPage pg in xtraTabControlFunction.TabPages)
-                {
-                    //test += string.Concat("페이지 이름: ",pg.Text," - ", "페이지 인덱스: ", pg.index.ToString())
-                }
+                LoadMccbFromExcel();
             };
 
             interLock.UpdateFullText(
