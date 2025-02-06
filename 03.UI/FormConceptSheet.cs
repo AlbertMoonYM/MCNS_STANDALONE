@@ -28,8 +28,6 @@ using DevExpress.XtraTab;
 //using Eplan.EplApi.Base;
 //using Eplan.EplApi.DataModel;
 
-//test git hub
-
 
 namespace MCNS_STANDALONE
 {
@@ -1693,22 +1691,6 @@ namespace MCNS_STANDALONE
                     }
 
                 }
-                if (e.Column.FieldName == "IFB1" || e.Column.FieldName == "IFB2" || e.Column.FieldName == "IFB3" || e.Column.FieldName == "IFB4")
-                {
-                    string type1Check = Convert.ToString(gridView1.GetRowCellValue(e.RowHandle, "TYPE1"));
-
-                    if (type1Check == "DIO")
-                    {
-                        gridView1.SetRowCellValue(e.RowHandle, e.Column.FieldName, false);
-                    }
-                    RepositoryItemCheckEdit checkEdit = new RepositoryItemCheckEdit();
-                    checkEdit.ValueChecked = true;
-                    checkEdit.ValueUnchecked = false;
-                    e.RepositoryItem = checkEdit; // 수정된 RepositoryItem을 셀에 적용
-                }
-
-
-
             };
             gridView1.RowCellStyle += (o, e) =>
             {
@@ -1723,8 +1705,8 @@ namespace MCNS_STANDALONE
                         e.Appearance.BackColor = Color.Red;
                         e.Appearance.ForeColor = Color.White; // 글자색 흰색으로 설정
                     }
-                }
 
+                }
 
             };
 
@@ -1898,7 +1880,13 @@ namespace MCNS_STANDALONE
                     foreach (DataRow row in CS_StaticSensor.logicIoDt.Rows)
                     {
                         string type2Value = row.Field<string>("TYPE2");
+                        string type1Value = row.Field<string>("TYPE1");
+                        string locationValue = row.Field<string>("LOCATION");
+                        string dtValue = row.Field<string>("DT");
 
+                        row["POINT"] = copyDt.AsEnumerable()
+                                             .Count(r => r.Field<string>("LOCATION") == locationValue &&
+                                                         r.Field<string>("DT") == dtValue);
                         if (type2Value != null)
                         {
                             // TYPE2 값에 'DI'가 포함된 경우
@@ -1915,22 +1903,6 @@ namespace MCNS_STANDALONE
                                 row["IFB2"] = false;
                             }
                         }
-
-
-                    }
-
-
-
-                    // POINT 값 설정
-                    foreach (DataRow row in CS_StaticSensor.logicIoDt.Rows)
-                    {
-                        string locationValue = row.Field<string>("LOCATION");
-                        string dtValue = row.Field<string>("DT");
-
-                        row["POINT"] = copyDt.AsEnumerable()
-                                             .Count(r => r.Field<string>("LOCATION") == locationValue &&
-                                                         r.Field<string>("DT") == dtValue);
-
                         // POINT 값이 32인 경우 모든 IFB 값을 true로 설정
                         int? pointValue = row.Field<int?>("POINT");
                         if (pointValue.HasValue && pointValue.Value == 32)
@@ -1940,8 +1912,24 @@ namespace MCNS_STANDALONE
                             row["IFB3"] = true;
                             row["IFB4"] = true;
                         }
+
+                        if (type1Value != null)
+                        {
+                            // TYPE2 값에 'DI'가 포함된 경우
+                            if (type1Value.Contains("DIO"))
+                            {
+                                row["IFB1"] = false;
+                                row["IFB2"] = false;
+                                row["IFB3"] = false;
+                                row["IFB4"] = false;
+                                                        }
+                        }
                     }
 
+
+
+                    
+                    
 
 
                     CS_StaticSensor.uniqueIoDt = new DataView(copyDt).ToTable(true, "LOCATION", "TYPE1", "PARTS", "DT");
