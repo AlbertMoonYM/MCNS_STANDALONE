@@ -452,248 +452,7 @@ namespace MCNS_STANDALONE
             cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkMotorMaker", cbFork2MotorMaker);
             cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkMotorMethod", cbFork2MotorMethod);
 
-            cbEleqSensorType.TextChanged += (o, e) =>
-            {
-                cbEleqSensorItem.Properties.Items.Clear();
-                cbLiftRightPosition.Properties.Items.Clear();
-                cbTrav1RightPosition.Properties.Items.Clear();
-                cbTrav2RightPosition.Properties.Items.Clear();
-                cbFork1RightPosition.Properties.Items.Clear();
-                cbFork2RightPosition.Properties.Items.Clear();
-                cbCarrSensor.Properties.Items.Clear();
-                cbCarrDoubleInput.Properties.Items.Clear();
-
-                cbEleqSensorItem.SelectedIndex = -1;
-                cbLiftRightPosition.SelectedIndex = -1;
-                cbTrav1RightPosition.SelectedIndex = -1;
-                cbTrav2RightPosition.SelectedIndex = -1;
-                cbFork1RightPosition.SelectedIndex = -1;
-                cbFork2RightPosition.SelectedIndex = -1;
-                cbCarrSensor.SelectedIndex = -1;
-                cbCarrDoubleInput.SelectedIndex = -1;
-
-                if (cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C")
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqModem", cbEleqModem);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqSensorItem", cbEleqSensorItem);
-                }
-                else if (cbEleqSensorType.Text == "NPN")
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqNpnSensorItem", cbEleqSensorItem);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftNpnRightPosition", cbLiftRightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravNpnRightPosition", cbTrav1RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravNpnRightPosition", cbTrav2RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkNpnRightPosition", cbFork1RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkNpnRightPosition", cbFork2RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrNpnSensor", cbCarrSensor);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrNpnDoubleInput", cbCarrDoubleInput);
-
-                }
-                else if (cbEleqSensorType.Text == "PNP")
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqPnpSensorItem", cbEleqSensorItem);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftPnpRightPosition", cbLiftRightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravPnpRightPosition", cbTrav1RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravPnpRightPosition", cbTrav2RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkPnpRightPosition", cbFork1RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkPnpRightPosition", cbFork2RightPosition);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrPnpSensor", cbCarrSensor);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrPnpDoubleInput", cbCarrDoubleInput);
-
-                }
-            };
-
-            // 콜드 타입 로직
-            cbMODoption1.TextChanged += ColdTypeOption_TextChanged;
-            cbMODoption2.TextChanged += ColdTypeOption_TextChanged;
-            cbMODoption3.TextChanged += ColdTypeOption_TextChanged;
-            cbMODoption4.TextChanged += ColdTypeOption_TextChanged;
-
-            ckbLiftRaser.CheckedChanged += (o, e) =>
-            {
-                cbLiftAbsLocation.SelectedIndex = -1;
-
-                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C")&& ckbLiftRaser.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdLiftAbsLocation", cbLiftAbsLocation);
-                }
-                else if (ckbLiftRaser.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftRaserAbsLocation", cbLiftAbsLocation);
-                }
-            };
-            ckbLiftBarcode.CheckedChanged += (o, e) =>
-            {
-                cbLiftAbsLocation.SelectedIndex = -1;
-
-                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbLiftBarcode.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdLiftAbsLocation", cbLiftAbsLocation);
-                }
-                else if (ckbLiftBarcode.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftBarcodeAbsLocation", cbLiftAbsLocation);
-                }
-            };
-            ckbTrav1Raser.CheckedChanged += (o, e) =>
-            {
-                cbTrav1AbsLocation.SelectedIndex = -1;
-
-                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav1Raser.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav1AbsLocation);
-                }
-                else if (ckbTrav1Raser.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav1AbsLocation);
-                }
-            };
-            ckbTrav1Barcode.CheckedChanged += (o, e) =>
-            {
-                cbTrav1AbsLocation.SelectedIndex = -1;
-
-                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav1Barcode.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav1AbsLocation);
-                }
-                else if (ckbTrav1Barcode.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav1AbsLocation);
-                }
-            };
-            ckbTrav2Raser.CheckedChanged += (o, e) =>
-            {
-                cbTrav2AbsLocation.SelectedIndex = -1;
-
-                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav2Raser.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav2AbsLocation);
-                }
-                else if (ckbTrav2Raser.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav2AbsLocation);
-                }
-            };
-            ckbTrav2Barcode.CheckedChanged += (o, e) =>
-            {
-                cbTrav2AbsLocation.SelectedIndex = -1;
-
-                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav2Barcode.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav2AbsLocation);
-                }
-                else if (ckbTrav2Barcode.Checked)
-                {
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav2AbsLocation);
-                }
-            };
-
-
-            void ColdTypeOption_TextChanged(object sender, EventArgs e)
-            {
-                // "C"가 포함되어 있는지 확인
-                if (cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C")
-                {
-                    cbEleqModem.Properties.Items.Clear();
-                    cbEleqSensorItem.Properties.Items.Clear();
-                    cbLiftAbsLocation.Properties.Items.Clear();
-                    cbTrav1AbsLocation.Properties.Items.Clear();
-                    cbTrav2AbsLocation.Properties.Items.Clear();
-                    cbLiftBrakeOption.Properties.Items.Clear();
-                    cbTrav1BrakeOption.Properties.Items.Clear();
-                    cbTrav2BrakeOption.Properties.Items.Clear();
-                    cbFork1BrakeOption.Properties.Items.Clear();
-                    cbFork2BrakeOption.Properties.Items.Clear();
-
-                    cbEleqModem.SelectedIndex = -1;
-                    cbEleqSensorItem.SelectedIndex = -1;
-                    cbLiftAbsLocation.SelectedIndex = -1;
-                    cbTrav1AbsLocation.SelectedIndex = -1;
-                    cbTrav2AbsLocation.SelectedIndex = -1;
-                    cbLiftBrakeOption.SelectedIndex = -1;
-                    cbTrav1BrakeOption.SelectedIndex = -1;
-                    cbTrav2BrakeOption.SelectedIndex = -1;
-                    cbFork1BrakeOption.SelectedIndex = -1;
-                    cbFork2BrakeOption.SelectedIndex = -1;
-
-
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqModem", cbEleqModem);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqSensorItem", cbEleqSensorItem);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdLiftBrakeOption", cbLiftBrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdTravBrakeOption", cbTrav1BrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdTravBrakeOption", cbTrav2BrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdForkBrakeOption", cbFork1BrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdForkBrakeOption", cbFork2BrakeOption);
-
-                    if (ckbLiftRaser.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdLiftAbsLocation", cbLiftAbsLocation);
-                    }
-                    else if (ckbLiftBarcode.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdLiftAbsLocation", cbLiftAbsLocation);
-                    }
-                    if (ckbTrav1Raser.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav1AbsLocation);
-                    }
-                    else if (ckbTrav1Barcode.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav1AbsLocation);
-                    }
-                    if (ckbTrav2Raser.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav2AbsLocation);
-                    }
-                    else if (ckbTrav2Barcode.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav2AbsLocation);
-                    }
-                }
-                else
-                {
-
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqModem", cbEleqModem);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftBrakeOption", cbLiftBrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBrakeOption", cbTrav1BrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBrakeOption", cbTrav2BrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkBrakeOption", cbFork1BrakeOption);
-                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkBrakeOption", cbFork2BrakeOption);
-
-                    if (cbEleqSensorType.Text == "NPN")
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqNpnSensorItem", cbEleqSensorItem);
-                    }
-                    else if (cbEleqSensorType.Text == "PNP")
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqPnpSensorItem", cbEleqSensorItem);
-                    }
-                    if (ckbLiftRaser.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftRaserAbsLocation", cbLiftAbsLocation);
-                    }
-                    else if (ckbLiftBarcode.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftBarcodeAbsLocation", cbLiftAbsLocation);
-                    }
-                    if (ckbTrav1Raser.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav1AbsLocation);
-                    }
-                    else if (ckbTrav1Barcode.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav1AbsLocation);
-                    }
-                    if (ckbTrav2Raser.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav2AbsLocation);
-                    }
-                    else if (ckbTrav2Barcode.Checked)
-                    {
-                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav2AbsLocation);
-                    }
-                }
-            }
+            
 
         }
         public void SetComboBoxDefaultValue()
@@ -2919,12 +2678,12 @@ namespace MCNS_STANDALONE
             interLock.AlramToFunctionByText(rtbxFork2, new Control[] { cbMODname, ckbMODforkoption, cbMODoption1, cbMODoption2, cbMODoption3, cbMODoption4, cbMSPinputVolt, cbMSPinputHz, cbMSPcontrollerSpec, cbMSPinverterMaker, cbMSPinverterSpec, cbEleqSensorType, ckbTravDoubleMotorTrue, ckbRegenerativeUnitTrue });
             interLock.AlramToFunctionByText(rtbxCarr, new Control[] { cbMODname, ckbMODforkoption, cbMODoption1, cbMODoption2, cbMODoption3, cbMODoption4, cbMSPinputVolt, cbMSPinputHz, cbMSPcontrollerSpec, cbMSPinverterMaker, cbMSPinverterSpec, cbEleqSensorType, ckbTravDoubleMotorTrue, ckbRegenerativeUnitTrue });
 
-
+            //패널 사이즈에 따른 팬 수량
+            UpdateFanQuantityByPanel();
             cbMSPpanelSizeW.TextChanged += (o, e) =>
             {
                 UpdateFanQuantityByPanel();
             };
-            UpdateFanQuantityByPanel();
             void UpdateFanQuantityByPanel()
             {
                 if (int.TryParse(cbMSPpanelSizeW.Text, out int value))
@@ -2944,6 +2703,7 @@ namespace MCNS_STANDALONE
                 }
             }
 
+            //프로젝트 옵션 콤보 박스 visble 인터락
             List<string> opItemsList = cbMODoption1.Properties.Items.Cast<string>().ToList();
             cbMODoption2.Hide();
             cbMODoption3.Hide();
@@ -3019,6 +2779,7 @@ namespace MCNS_STANDALONE
                 }
             }
 
+            //화물 셀 기입 인터락
             gridViewCargo.CellValueChanged += (o, e) =>
             {
                 //int rowCount = 3; // 1~3행만 검사 (필요시 rowCount를 조정)
@@ -3122,9 +2883,302 @@ namespace MCNS_STANDALONE
             // button을 Radio button으로 사용
             cs_CheckBox.ChangeToRadioButton(ckbTrav2Raser, ckbTrav2Barcode);
 
-            //interLock.BlockCtrlsByInverter(cbMSPinverterMaker, cbMSPinverterSpec,"SEW","MODULAR" ,new Control[] { cbLiftMccbSpec, cbTrav1MccbSpec, cbTrav2MccbSpec, cbFork1MccbSpec, cbFork2MccbSpec, cbLiftBrakeResistorKw, cbLiftBrakeResistorOhm, cbTrav1BrakeResistorKw, cbTrav1BrakeResistorOhm, cbTrav2BrakeResistorKw, cbTrav2BrakeResistorOhm, cbFork1BrakeResistorKw, cbFork1BrakeResistorOhm, cbFork2BrakeResistorKw, cbFork2BrakeResistorOhm });
-            //interLock.BlockCtrlsByInverter(cbMSPinverterMaker, cbMSPinverterSpec, "SEW", "SYSTEM", new Control[] { cbEleqPowerKw, cbEleqBrakeResistorKw, cbEleqBrakeResistorOhm });
+            //NPN,PNP,COLD 타입에 따른 목록 인터락
+            cbEleqSensorType.TextChanged += (o, e) =>
+            {
+                cbEleqSensorItem.Properties.Items.Clear();
+                cbLiftRightPosition.Properties.Items.Clear();
+                cbTrav1RightPosition.Properties.Items.Clear();
+                cbTrav2RightPosition.Properties.Items.Clear();
+                cbFork1RightPosition.Properties.Items.Clear();
+                cbFork2RightPosition.Properties.Items.Clear();
+                cbCarrSensor.Properties.Items.Clear();
+                cbCarrDoubleInput.Properties.Items.Clear();
+
+                cbEleqSensorItem.SelectedIndex = -1;
+                cbLiftRightPosition.SelectedIndex = -1;
+                cbTrav1RightPosition.SelectedIndex = -1;
+                cbTrav2RightPosition.SelectedIndex = -1;
+                cbFork1RightPosition.SelectedIndex = -1;
+                cbFork2RightPosition.SelectedIndex = -1;
+                cbCarrSensor.SelectedIndex = -1;
+                cbCarrDoubleInput.SelectedIndex = -1;
+
+                if (cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C")
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqModem", cbEleqModem);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqSensorItem", cbEleqSensorItem);
+                }
+                else if (cbEleqSensorType.Text == "NPN")
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqNpnSensorItem", cbEleqSensorItem);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftNpnRightPosition", cbLiftRightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravNpnRightPosition", cbTrav1RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravNpnRightPosition", cbTrav2RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkNpnRightPosition", cbFork1RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkNpnRightPosition", cbFork2RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrNpnSensor", cbCarrSensor);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrNpnDoubleInput", cbCarrDoubleInput);
+
+                }
+                else if (cbEleqSensorType.Text == "PNP")
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqPnpSensorItem", cbEleqSensorItem);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftPnpRightPosition", cbLiftRightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravPnpRightPosition", cbTrav1RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravPnpRightPosition", cbTrav2RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkPnpRightPosition", cbFork1RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkPnpRightPosition", cbFork2RightPosition);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrPnpSensor", cbCarrSensor);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listCarrPnpDoubleInput", cbCarrDoubleInput);
+
+                }
+            };
+            cbMODoption1.TextChanged += ColdTypeOption_TextChanged;
+            cbMODoption2.TextChanged += ColdTypeOption_TextChanged;
+            cbMODoption3.TextChanged += ColdTypeOption_TextChanged;
+            cbMODoption4.TextChanged += ColdTypeOption_TextChanged;
+            ckbLiftRaser.CheckedChanged += (o, e) =>
+            {
+                cbLiftAbsLocation.SelectedIndex = -1;
+
+                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbLiftRaser.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdLiftAbsLocation", cbLiftAbsLocation);
+                }
+                else if (ckbLiftRaser.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftRaserAbsLocation", cbLiftAbsLocation);
+                }
+            };
+            ckbLiftBarcode.CheckedChanged += (o, e) =>
+            {
+                cbLiftAbsLocation.SelectedIndex = -1;
+
+                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbLiftBarcode.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdLiftAbsLocation", cbLiftAbsLocation);
+                }
+                else if (ckbLiftBarcode.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftBarcodeAbsLocation", cbLiftAbsLocation);
+                }
+            };
+            ckbTrav1Raser.CheckedChanged += (o, e) =>
+            {
+                cbTrav1AbsLocation.SelectedIndex = -1;
+
+                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav1Raser.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav1AbsLocation);
+                }
+                else if (ckbTrav1Raser.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav1AbsLocation);
+                }
+            };
+            ckbTrav1Barcode.CheckedChanged += (o, e) =>
+            {
+                cbTrav1AbsLocation.SelectedIndex = -1;
+
+                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav1Barcode.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav1AbsLocation);
+                }
+                else if (ckbTrav1Barcode.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav1AbsLocation);
+                }
+            };
+            ckbTrav2Raser.CheckedChanged += (o, e) =>
+            {
+                cbTrav2AbsLocation.SelectedIndex = -1;
+
+                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav2Raser.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav2AbsLocation);
+                }
+                else if (ckbTrav2Raser.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav2AbsLocation);
+                }
+            };
+            ckbTrav2Barcode.CheckedChanged += (o, e) =>
+            {
+                cbTrav2AbsLocation.SelectedIndex = -1;
+
+                if ((cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C") && ckbTrav2Barcode.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav2AbsLocation);
+                }
+                else if (ckbTrav2Barcode.Checked)
+                {
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav2AbsLocation);
+                }
+            };
+            void ColdTypeOption_TextChanged(object sender, EventArgs e)
+            {
+                // "C"가 포함되어 있는지 확인
+                if (cbMODoption1.Text == "C" || cbMODoption2.Text == "C" || cbMODoption3.Text == "C" || cbMODoption4.Text == "C")
+                {
+                    cbOPmachineControl.SelectedIndex = 1;
+
+                    cbEleqModem.Properties.Items.Clear();
+                    cbEleqSensorItem.Properties.Items.Clear();
+                    cbLiftAbsLocation.Properties.Items.Clear();
+                    cbTrav1AbsLocation.Properties.Items.Clear();
+                    cbTrav2AbsLocation.Properties.Items.Clear();
+                    cbLiftBrakeOption.Properties.Items.Clear();
+                    cbTrav1BrakeOption.Properties.Items.Clear();
+                    cbTrav2BrakeOption.Properties.Items.Clear();
+                    cbFork1BrakeOption.Properties.Items.Clear();
+                    cbFork2BrakeOption.Properties.Items.Clear();
+
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqModem", cbEleqModem);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdEleqSensorItem", cbEleqSensorItem);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdLiftBrakeOption", cbLiftBrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdTravBrakeOption", cbTrav1BrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdTravBrakeOption", cbTrav2BrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdForkBrakeOption", cbFork1BrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listColdForkBrakeOption", cbFork2BrakeOption);
+
+                    if (ckbLiftRaser.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdLiftAbsLocation", cbLiftAbsLocation);
+                    }
+                    else if (ckbLiftBarcode.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdLiftAbsLocation", cbLiftAbsLocation);
+                    }
+                    if (ckbTrav1Raser.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav1AbsLocation);
+                    }
+                    else if (ckbTrav1Barcode.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav1AbsLocation);
+                    }
+                    if (ckbTrav2Raser.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listRaserColdTravAbsLocation", cbTrav2AbsLocation);
+                    }
+                    else if (ckbTrav2Barcode.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listBarcodeColdTravAbsLocation", cbTrav2AbsLocation);
+                    }
+
+                    cbEleqModem.SelectedIndex = -1;
+                    cbEleqSensorItem.SelectedIndex = -1;
+                    cbLiftAbsLocation.SelectedIndex = -1;
+                    cbTrav1AbsLocation.SelectedIndex = -1;
+                    cbTrav2AbsLocation.SelectedIndex = -1;
+                    cbLiftBrakeOption.SelectedIndex = 0;
+                    cbTrav1BrakeOption.SelectedIndex = 0;
+                    cbTrav2BrakeOption.SelectedIndex = 0;
+                    cbFork1BrakeOption.SelectedIndex = 0;
+                    cbFork2BrakeOption.SelectedIndex = 0;
+                }
+                else
+                {
+                    cbOPmachineControl.SelectedIndex = 0;
+
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqModem", cbEleqModem);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftBrakeOption", cbLiftBrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBrakeOption", cbTrav1BrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBrakeOption", cbTrav2BrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkBrakeOption", cbFork1BrakeOption);
+                    cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listForkBrakeOption", cbFork2BrakeOption);
+
+                    if (cbEleqSensorType.Text == "NPN")
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqNpnSensorItem", cbEleqSensorItem);
+                    }
+                    else if (cbEleqSensorType.Text == "PNP")
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listEleqPnpSensorItem", cbEleqSensorItem);
+                    }
+                    if (ckbLiftRaser.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftRaserAbsLocation", cbLiftAbsLocation);
+                    }
+                    else if (ckbLiftBarcode.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listLiftBarcodeAbsLocation", cbLiftAbsLocation);
+                    }
+                    if (ckbTrav1Raser.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav1AbsLocation);
+                    }
+                    else if (ckbTrav1Barcode.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav1AbsLocation);
+                    }
+                    if (ckbTrav2Raser.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravRaserAbsLocation", cbTrav2AbsLocation);
+                    }
+                    else if (ckbTrav2Barcode.Checked)
+                    {
+                        cs_ListItems.LoadListFromXmlToComboBox(CS_PathData.ItemListFilePath, "listTravBarcodeAbsLocation", cbTrav2AbsLocation);
+                    }
+                }
+            }
+
+            InverterSpecTextChanged();
+            cbMSPinverterSpec.TextChanged += (o, e) =>
+            {
+                InverterSpecTextChanged();
+            };
+            void InverterSpecTextChanged () 
+            {
+                ComboBoxEdit[] cbModular = { cbEleqPowerKw, cbEleqPowerA, cbEleqBrakeResistorKw, cbEleqBrakeResistorOhm };
+                ComboBoxEdit[] cbSystem =
+                {
+                    cbLiftBrakeResistorKw, cbLiftBrakeResistorOhm, cbLiftMccbSpec,
+                    cbTrav1BrakeResistorKw, cbTrav1BrakeResistorOhm, cbTrav1MccbSpec,
+                    cbTrav2BrakeResistorKw, cbTrav2BrakeResistorOhm, cbTrav2MccbSpec,
+                    cbFork1BrakeResistorKw, cbFork1BrakeResistorOhm, cbFork1MccbSpec,
+                    cbFork2BrakeResistorKw, cbFork2BrakeResistorOhm, cbFork2MccbSpec,
+                };
+
+                if (cbMSPinverterSpec.Text == "MODULAR")
+                {
+                    foreach (ComboBoxEdit cb in cbModular)
+                    {
+                        cb.SelectedIndex = -1;
+                        cb.Enabled = true;
+                        cb.BackColor = Color.LightGray;
+                        cb.ForeColor = Color.Gray;
+                    }
+                    foreach (ComboBoxEdit cb in cbSystem)
+                    {
+                        cb.SelectedIndex = -1;
+                        cb.Enabled = false;
+                        cb.BackColor = Color.LightCoral;
+                        cb.ForeColor = Color.Gray;
+                    }
+                }
+                else
+                {
+                    foreach (ComboBoxEdit cb in cbSystem)
+                    {
+                        cb.SelectedIndex = -1;
+                        cb.Enabled = true;
+                        cb.BackColor = Color.LightGray;
+                        cb.ForeColor = Color.Gray;
+                    }
+                    foreach (ComboBoxEdit cb in cbModular)
+                    {
+                        cb.SelectedIndex = -1;
+                        cb.Enabled = false;
+                        cb.BackColor = Color.LightCoral;
+                        cb.ForeColor = Color.Gray;
+                    }
+                }
+            }
+
         }
+
         private void UpdateComboBoxItemList()
         {
             if (watcher == null) // watcher가 아직 생성되지 않은 경우에만 생성

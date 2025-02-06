@@ -920,6 +920,13 @@
             this.panel235 = new System.Windows.Forms.Panel();
             this.picBoxProjectGenerate = new System.Windows.Forms.PictureBox();
             this.label126 = new System.Windows.Forms.Label();
+            this.transparentPanel3 = new MCNS_STANDALONE.TransparentPanel();
+            this.transparentPanel4 = new MCNS_STANDALONE.TransparentPanel();
+            this.transparentPanel5 = new MCNS_STANDALONE.TransparentPanel();
+            this.transparentPanel6 = new MCNS_STANDALONE.TransparentPanel();
+            this.transparentPanel7 = new MCNS_STANDALONE.TransparentPanel();
+            this.transparentPanel8 = new MCNS_STANDALONE.TransparentPanel();
+            this.transparentPanel9 = new MCNS_STANDALONE.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pnlTap)).BeginInit();
             this.pnlTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxItems.Properties)).BeginInit();
@@ -5425,6 +5432,7 @@
             // panel160
             // 
             this.panel160.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel160.Controls.Add(this.transparentPanel3);
             this.panel160.Controls.Add(this.rtbxEleq);
             this.panel160.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel160.Location = new System.Drawing.Point(0, 0);
@@ -5476,6 +5484,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.transparentPanel4);
             this.splitContainer2.Panel1.Controls.Add(this.grpLiftSensorList);
             this.splitContainer2.Panel1.Controls.Add(this.grpLiftDrive);
             this.splitContainer2.Panel1.Controls.Add(this.grpLiftSensor);
@@ -6906,6 +6915,7 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.transparentPanel5);
             this.splitContainer3.Panel1.Controls.Add(this.grpTrav1SensorList);
             this.splitContainer3.Panel1.Controls.Add(this.grpTrav1Drive);
             this.splitContainer3.Panel1.Controls.Add(this.grpTrav1Sensor);
@@ -8336,6 +8346,7 @@
             // 
             // splitContainer5.Panel1
             // 
+            this.splitContainer5.Panel1.Controls.Add(this.transparentPanel6);
             this.splitContainer5.Panel1.Controls.Add(this.grpTrav2SensorList);
             this.splitContainer5.Panel1.Controls.Add(this.grpTrav2Drive);
             this.splitContainer5.Panel1.Controls.Add(this.grpTrav2Sensor);
@@ -9766,6 +9777,7 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.transparentPanel7);
             this.splitContainer4.Panel1.Controls.Add(this.grpFork1SensorList);
             this.splitContainer4.Panel1.Controls.Add(this.grpFork1Drive);
             this.splitContainer4.Panel1.Controls.Add(this.grpFork1Sensor);
@@ -11079,6 +11091,7 @@
             // 
             // splitContainer6.Panel1
             // 
+            this.splitContainer6.Panel1.Controls.Add(this.transparentPanel8);
             this.splitContainer6.Panel1.Controls.Add(this.grpFork2SensorList);
             this.splitContainer6.Panel1.Controls.Add(this.grpFork2Drive);
             this.splitContainer6.Panel1.Controls.Add(this.grpFork2Sensor);
@@ -12392,6 +12405,7 @@
             // 
             // splitContainer7.Panel1
             // 
+            this.splitContainer7.Panel1.Controls.Add(this.transparentPanel9);
             this.splitContainer7.Panel1.Controls.Add(this.grpCarrSensorList);
             this.splitContainer7.Panel1.Controls.Add(this.grpCarrSensor);
             this.splitContainer7.Panel1.Controls.Add(this.rtbxCarr);
@@ -12862,6 +12876,55 @@
             this.label126.TabIndex = 59;
             this.label126.Text = "프로젝트 생성";
             this.label126.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // transparentPanel3
+            // 
+            this.transparentPanel3.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel3.Name = "transparentPanel3";
+            this.transparentPanel3.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel3.TabIndex = 62;
+            // 
+            // transparentPanel4
+            // 
+            this.transparentPanel4.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel4.Name = "transparentPanel4";
+            this.transparentPanel4.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel4.TabIndex = 63;
+            // 
+            // transparentPanel5
+            // 
+            this.transparentPanel5.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel5.Name = "transparentPanel5";
+            this.transparentPanel5.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel5.TabIndex = 63;
+            // 
+            // transparentPanel6
+            // 
+            this.transparentPanel6.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel6.Name = "transparentPanel6";
+            this.transparentPanel6.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel6.TabIndex = 63;
+            // 
+            // transparentPanel7
+            // 
+            this.transparentPanel7.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel7.Name = "transparentPanel7";
+            this.transparentPanel7.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel7.TabIndex = 63;
+            // 
+            // transparentPanel8
+            // 
+            this.transparentPanel8.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel8.Name = "transparentPanel8";
+            this.transparentPanel8.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel8.TabIndex = 63;
+            // 
+            // transparentPanel9
+            // 
+            this.transparentPanel9.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel9.Name = "transparentPanel9";
+            this.transparentPanel9.Size = new System.Drawing.Size(562, 70);
+            this.transparentPanel9.TabIndex = 63;
             // 
             // FormConceptSheet
             // 
@@ -14735,5 +14798,12 @@
         private DevExpress.XtraEditors.LabelControl labelControl168;
         private DevExpress.XtraEditors.ComboBoxEdit cbTrav2LimitSwitch;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private TransparentPanel transparentPanel3;
+        private TransparentPanel transparentPanel4;
+        private TransparentPanel transparentPanel5;
+        private TransparentPanel transparentPanel6;
+        private TransparentPanel transparentPanel7;
+        private TransparentPanel transparentPanel8;
+        private TransparentPanel transparentPanel9;
     }
 }
