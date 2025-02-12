@@ -442,7 +442,6 @@ C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\De
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Eplan.EplApi.HEServicesu.dll
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Eplan.EplApi.AFu.dll
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Eplan.EplApi.Baseu.dll
-C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Microsoft.WindowsAPICodePack.Core.dll
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Eplan.EplApi.EServicesu.dll
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Eplan.EplApi.MasterDatau.dll
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Eplan.EplApi.Starteru.dll
@@ -514,3 +513,4 @@ C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\obj\De
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\obj\Debug\MCNS_STA.6FDDF4FF.Up2Date
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\obj\Debug\MCNS_STANDALONE.exe
 C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\obj\Debug\MCNS_STANDALONE.pdb
+C:\Users\kr70009769\Desktop\01.Task\02. API 소스\03. C#\MCNS_STANDALONE\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml

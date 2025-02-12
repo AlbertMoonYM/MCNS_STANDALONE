@@ -25,6 +25,7 @@ using DevExpress.XtraEditors.Repository;
 using McnsSchemGenEngine.Models;
 using OfficeOpenXml;
 using DevExpress.XtraTab;
+using System.Threading;
 //using Eplan.EplApi.Base;
 //using Eplan.EplApi.DataModel;
 
@@ -53,6 +54,7 @@ namespace MCNS_STANDALONE
         //전역 변수 설정
         private DataTable excelIoDt = new DataTable();
         private DataTable excelMccbDt = new DataTable();
+        private DataTable excelCableDt = new DataTable();
 
         public FormConceptSheet()
         {
@@ -74,6 +76,7 @@ namespace MCNS_STANDALONE
             UpdateComboBoxItemList();
             SetComboBoxDefaultValue();
             Interlock();
+
         }
         public void SetComboBoxFunction()
         {
@@ -81,13 +84,13 @@ namespace MCNS_STANDALONE
             // button을 Radio button으로 사용
             cs_CheckBox.ChangeToRadioButton(ckbPRJdomestic, ckbPRJoverseas);
             // 프로젝트 ChangeToTextBox 설정
-            cs_ComboBox.ChangeToTextBox(cbPRJnumber, TypeFlag.strFlag, 30, "텍스트를 기입하세요.","");
-            cs_ComboBox.ChangeToTextBox(cbPRJname, TypeFlag.strFlag, 30, "텍스트를 기입하세요.", "");
-            cs_ComboBox.ChangeToTextBox(cbPRJwriter, TypeFlag.strFlag, 10, "텍스트를 기입하세요.", "");
+            cs_ComboBox.ChangeToTextBox(cbPRJnumber, "텍스트를 기입하세요.", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbPRJname, "텍스트를 기입하세요.", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbPRJwriter, "텍스트를 기입하세요.", false, TypeFlag.strFlag);
             // 프로젝트 SettingComboBox 설정
-            cs_ComboBox.SettingComboBox(cbPRJyear, "-");
-            cs_ComboBox.SettingComboBox(cbPRJmonth, "-");
-            cs_ComboBox.SettingComboBox(cbPRJday, "-");
+            cs_ComboBox.SettingComboBox(cbPRJyear, "년도", false);
+            cs_ComboBox.SettingComboBox(cbPRJmonth, "월", false);
+            cs_ComboBox.SettingComboBox(cbPRJday, "일", false);
             int currentYear = DateTime.Now.Year;
             // 연도 추가 (현재 연도를 기준으로 ±10년)
             cbPRJyear.Properties.Items.AddRange(
@@ -104,33 +107,33 @@ namespace MCNS_STANDALONE
                 Enumerable.Range(1, 31).Select(d => d.ToString("D2")).ToArray());
 
             // 모델 ChangeToTextBox 설정
-            cs_ComboBox.ChangeToTextBox(cbMODheight, TypeFlag.intFlag, 10, "높이", "");
-            cs_ComboBox.ChangeToTextBox(cbMODweight, TypeFlag.intFlag, 10, "화물 중량", "");
-            cs_ComboBox.ChangeToTextBox(cbMODfullName, TypeFlag.strFlag, 0, "", "");
+            cs_ComboBox.ChangeToTextBox(cbMODheight, "높이", false, TypeFlag.intFlag);
+            cs_ComboBox.ChangeToTextBox(cbMODweight, "화물 중량", false, TypeFlag.intFlag);
+            cs_ComboBox.ChangeToTextBox(cbMODfullName, "", false, TypeFlag.intFlag);
             // 모델 SettingComboBox 설정
-            cs_ComboBox.SettingComboBox(cbMODname, "모델명");
-            cs_ComboBox.SettingComboBox(cbMODoption1, "-");
-            cs_ComboBox.SettingComboBox(cbMODoption2, "-");
-            cs_ComboBox.SettingComboBox(cbMODoption3, "-");
-            cs_ComboBox.SettingComboBox(cbMODoption4, "-");
+            cs_ComboBox.SettingComboBox(cbMODname, "모델명", false);
+            cs_ComboBox.SettingComboBox(cbMODoption1, "-", false);
+            cs_ComboBox.SettingComboBox(cbMODoption2, "-", false);
+            cs_ComboBox.SettingComboBox(cbMODoption3, "-", false);
+            cs_ComboBox.SettingComboBox(cbMODoption4, "-", false);
 
 
             // 주요 사양 ChangeToTextBox 설정
-            cs_ComboBox.ChangeToTextBox(cbMSPpanelSizeW, TypeFlag.intFlag, 4, "-", "");
-            cs_ComboBox.ChangeToTextBox(cbMSPpanelSizeD, TypeFlag.intFlag, 4, "-", "");
-            cs_ComboBox.ChangeToTextBox(cbMSPpanelSizeH, TypeFlag.intFlag, 4, "-", "");
+            cs_ComboBox.ChangeToTextBox(cbMSPpanelSizeW, "W", false, TypeFlag.intFlag);
+            cs_ComboBox.ChangeToTextBox(cbMSPpanelSizeD, "D", false, TypeFlag.intFlag);
+            cs_ComboBox.ChangeToTextBox(cbMSPpanelSizeH, "H", false, TypeFlag.intFlag);
             // 주요 사양 SettingComboBox 설정
-            cs_ComboBox.SettingComboBox(cbMSPinputVolt, "-");
-            cs_ComboBox.SettingComboBox(cbMSPinputHz, "-");
-            cs_ComboBox.SettingComboBox(cbMSPpanelSize, "-");
-            cs_ComboBox.SettingComboBox(cbMSPcontrollerSpec, "-");
-            cs_ComboBox.SettingComboBox(cbMSPinverterMaker, "-");
-            cs_ComboBox.SettingComboBox(cbMSPinverterSpec, "-");
+            cs_ComboBox.SettingComboBox(cbMSPinputVolt, "-", false);
+            cs_ComboBox.SettingComboBox(cbMSPinputHz, "-", false);
+            cs_ComboBox.SettingComboBox(cbMSPpanelSize, "-", false);
+            cs_ComboBox.SettingComboBox(cbMSPcontrollerSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbMSPinverterMaker, "-", false);
+            cs_ComboBox.SettingComboBox(cbMSPinverterSpec, "-", false);
 
             // 레이아웃 ChangeToTextBox 설정
-            cs_ComboBox.ChangeToTextBox(cbLOUTtravLength, TypeFlag.fltFlag, 10, "실수 기입", "M");
-            cs_ComboBox.ChangeToTextBox(cbLOUTliftHeight, TypeFlag.fltFlag, 10, "실수 기입", "M");
-            cs_ComboBox.ChangeToTextBox(cbLOUTstationNum, TypeFlag.intFlag, 1, "정수 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbLOUTtravLength, "M", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLOUTliftHeight, "M", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLOUTstationNum, "EA", true, TypeFlag.intFlag);
 
             // 레이아웃 화물 DataGridView 셋업
             cs_DataTable.GetDataTable(CS_StaticUnit.dtLout, CS_StaticString.dArrDtLoutColums);
@@ -143,221 +146,222 @@ namespace MCNS_STANDALONE
             cs_DataGrid.SetLoutCargo(gridViewCargo);
 
             // 옵션 SettingComboBox 설정
-            cs_ComboBox.SettingComboBox(cbOPmachineControl, "-");
-            cs_ComboBox.SettingComboBox(cbOPremoteControl, "-");
-            cs_ComboBox.SettingComboBox(cbOPemergencyPower, "-");
-            cs_ComboBox.SettingComboBox(cbOPemergencyLocation, "-");
+            cs_ComboBox.SettingComboBox(cbOPmachineControl, "-", false);
+            cs_ComboBox.SettingComboBox(cbOPremoteControl, "-", false);
+            cs_ComboBox.SettingComboBox(cbOPemergencyPower, "-", false);
+            cs_ComboBox.SettingComboBox(cbOPemergencyLocation, "-", false);
 
 
             // ELEQ 기능 그룹
             // ChangeToTextBox 호출
-            cs_ComboBox.ChangeToTextBox(cbEleqPowerKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbEleqPowerA, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbEleqBrakeResistorKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbEleqBrakeResistorOhm, TypeFlag.fltFlag, 10, "실수 기입", "Ω");
-            cs_ComboBox.ChangeToTextBox(cbEleqPowerCable, TypeFlag.fltFlag, 10, "실수 기입", "SQ");
-            cs_ComboBox.ChangeToTextBox(cbEleqMccbSpec, TypeFlag.strFlag, 10, "텍스트 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbEleqBrakeResistorKw, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbEleqBrakeResistorOhm, "Ω", true, TypeFlag.fltFlag);
 
             // SettingComboBox 호출
-            cs_ComboBox.SettingComboBox(cbMSPusingVoltage, "-");
-            cs_ComboBox.SettingComboBox(cbEleqMccbModel, "-");
-            cs_ComboBox.SettingComboBox(cbEleqSmpsModel, "-");
-            cs_ComboBox.SettingComboBox(cbEleqCableModel, "-");
-            cs_ComboBox.SettingComboBox(cbEleqHubModel, "-");
-            cs_ComboBox.SettingComboBox(cbEleqFanQuantity, "-");
-            cs_ComboBox.SettingComboBox(cbEleqTerminal, "-");
+            cs_ComboBox.SettingComboBox(cbEleqPowerKw, "kW", true);
+            cs_ComboBox.SettingComboBox(cbEleqPowerA, "A", true);
+            cs_ComboBox.SettingComboBox(cbEleqMainMccbSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqMainPowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbEleqMccbSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqPowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbMSPusingVoltage, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqMccbModel, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqSmpsModel, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqCableModel, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqHubModel, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqFanQuantity, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqTerminal, "-", false);
 
-            cs_ComboBox.SettingComboBox(cbEleqPanel, "-");
-            cs_ComboBox.SettingComboBox(cbEleqHmi, "-");
-            cs_ComboBox.SettingComboBox(cbEleqOpt, "-");
-            cs_ComboBox.SettingComboBox(cbEleqTowerLamp, "-");
-            cs_ComboBox.SettingComboBox(cbEleqSafety, "-");
-            cs_ComboBox.SettingComboBox(cbEleqSafetyQuantity, "-");
+            cs_ComboBox.SettingComboBox(cbEleqPanel, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqHmi, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqOpt, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqTowerLamp, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqSafety, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqSafetyQuantity, "-", false);
 
-            cs_ComboBox.SettingComboBox(cbEleqSensorType, "-");
-            cs_ComboBox.SettingComboBox(cbEleqModem, "-");
-            cs_ComboBox.SettingComboBox(cbEleqInterLockSensorSide, "-");
-            cs_ComboBox.SettingComboBox(cbEleqInterLockBit, "-");
-            cs_ComboBox.SettingComboBox(cbEleqLocation, "-");
-            cs_ComboBox.SettingComboBox(cbEleqType, "-");
-            cs_ComboBox.SettingComboBox(cbEleqDt, "-");
-            cs_ComboBox.SettingComboBox(cbEleqParts, "-");
-            cs_ComboBox.SettingComboBox(cbEleqPoint, "-");
-            cs_ComboBox.SettingComboBox(cbEleqSensorItem, "-");
+            cs_ComboBox.SettingComboBox(cbEleqSensorType, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqModem, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqInterLockSensorSide, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqInterLockBit, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqLocation, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqType, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqDt, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqParts, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqPoint, "-", false);
+            cs_ComboBox.SettingComboBox(cbEleqSensorItem, "-", false);
 
 
             // LIFT 기능 그룹
-            cs_ComboBox.ChangeToTextBox(cbLiftInverterKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbLiftInverterA, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbLiftBrakeResistorKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbLiftBrakeResistorOhm, TypeFlag.fltFlag, 10, "실수 기입", "Ω");
-            cs_ComboBox.ChangeToTextBox(cbLiftPowerCable, TypeFlag.fltFlag, 10, "실수 기입", "SQ");
-            cs_ComboBox.ChangeToTextBox(cbLiftMccbSpec, TypeFlag.strFlag, 6, "텍스트 기입", "");
+            cs_ComboBox.SettingComboBox(cbLiftInverterKw, "kW", true);
+            cs_ComboBox.SettingComboBox(cbLiftInverterA, "A", true);
+            cs_ComboBox.ChangeToTextBox(cbLiftBrakeResistorKw, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftBrakeResistorOhm, "Ω", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbLiftPowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbLiftMccbSpec, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbLiftOutPut, TypeFlag.fltFlag, 10, "실수 기입", "kW");
-            cs_ComboBox.ChangeToTextBox(cbLiftSpeed, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbLiftGearRatio, TypeFlag.fltFlag, 10, "실수 기입", "i");
-            cs_ComboBox.ChangeToTextBox(cbLiftRatedCurrent, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbLiftBkVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.SettingComboBox(cbLiftBrakeOption, "-");
-            cs_ComboBox.SettingComboBox(cbLiftMotorSpec, "-");
-            cs_ComboBox.SettingComboBox(cbLiftMotorMaker, "-");
-            cs_ComboBox.SettingComboBox(cbLiftMotorMethod, "-");
-            cs_ComboBox.ChangeToTextBox(cbLiftMotorType, TypeFlag.strFlag, 10, "텍스트 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbLiftMotorVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.ChangeToTextBox(cbLiftMotorHz, TypeFlag.fltFlag, 10, "실수 기입", "Hz");
-            cs_ComboBox.ChangeToTextBox(cbLiftMotorEncoderSpec, TypeFlag.strFlag, 10, "텍스트 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbLiftOutPut, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftSpeed, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftGearRatio, "i", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftRatedCurrent, "A", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftBkVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbLiftBrakeOption, "-", false);
+            cs_ComboBox.SettingComboBox(cbLiftMotorSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbLiftMotorMaker, "-", false);
+            cs_ComboBox.SettingComboBox(cbLiftMotorMethod, "-", false);
+            cs_ComboBox.ChangeToTextBox(cbLiftMotorType, "텍스트 기입", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftMotorVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftMotorHz, "Hz", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftMotorEncoderSpec, "텍스트 기입", false, TypeFlag.strFlag);
 
-            cs_ComboBox.SettingComboBox(cbLiftAbsLocation, "-");
-            cs_ComboBox.SettingComboBox(cbLiftRightPosition, "-");
-            cs_ComboBox.SettingComboBox(cbLiftLimitSwitch, "-");
+            cs_ComboBox.SettingComboBox(cbLiftAbsLocation, "-", false);
+            cs_ComboBox.SettingComboBox(cbLiftRightPosition, "-", false);
+            cs_ComboBox.SettingComboBox(cbLiftLimitSwitch, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbLiftNoneLoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbLiftNoneLoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbLiftNoneLoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbLiftLoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbLiftLoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbLiftLoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbLiftNoneLoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftNoneLoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftNoneLoadAcceleration, "", false, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftLoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftLoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbLiftLoadAcceleration, "", false, TypeFlag.fltFlag);
 
 
             // TRAV1 기능 그룹
-            cs_ComboBox.ChangeToTextBox(cbTrav1InverterKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbTrav1InverterA, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbTrav1BrakeResistorKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbTrav1BrakeResistorOhm, TypeFlag.fltFlag, 10, "실수 기입", "Ω");
-            cs_ComboBox.ChangeToTextBox(cbTrav1PowerCable, TypeFlag.fltFlag, 10, "실수 기입", "SQ");
-            cs_ComboBox.ChangeToTextBox(cbTrav1MccbSpec, TypeFlag.strFlag, 6, "텍스트 기입", "");
+            cs_ComboBox.SettingComboBox(cbTrav1InverterKw, "kW", true);
+            cs_ComboBox.SettingComboBox(cbTrav1InverterA, "A", true);
+            cs_ComboBox.ChangeToTextBox(cbTrav1BrakeResistorKw, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1BrakeResistorOhm, "Ω", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbTrav1PowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbTrav1MccbSpec, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbTrav1OutPut, TypeFlag.fltFlag, 10, "실수 기입", "kW");
-            cs_ComboBox.ChangeToTextBox(cbTrav1Speed, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav1GearRatio, TypeFlag.fltFlag, 10, "실수 기입", "i");
-            cs_ComboBox.ChangeToTextBox(cbTrav1RatedCurrent, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbTrav1BkVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.SettingComboBox(cbTrav1BrakeOption, "-");
-            cs_ComboBox.SettingComboBox(cbTrav1MotorSpec, "-");
-            cs_ComboBox.SettingComboBox(cbTrav1MotorMaker, "-");
-            cs_ComboBox.SettingComboBox(cbTrav1MotorMethod, "-");
-            cs_ComboBox.ChangeToTextBox(cbTrav1MotorType, TypeFlag.strFlag, 10, "텍스트 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbTrav1MotorVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.ChangeToTextBox(cbTrav1MotorHz, TypeFlag.fltFlag, 10, "실수 기입", "Hz");
-            cs_ComboBox.ChangeToTextBox(cbTrav1MotorEncoderSpec, TypeFlag.strFlag, 10, "텍스트 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbTrav1OutPut, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1Speed, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1GearRatio, "i", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1RatedCurrent, "A", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1BkVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbTrav1BrakeOption, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav1MotorSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav1MotorMaker, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav1MotorMethod, "-", false);
+            cs_ComboBox.ChangeToTextBox(cbTrav1MotorType, "텍스트 기입", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1MotorVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1MotorHz, "Hz", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1MotorEncoderSpec, "텍스트 기입", false, TypeFlag.strFlag);
 
-            cs_ComboBox.SettingComboBox(cbTrav1AbsLocation, "-");
-            cs_ComboBox.SettingComboBox(cbTrav1RightPosition, "-");
-            cs_ComboBox.SettingComboBox(cbTrav1LimitSwitch, "-");
+            cs_ComboBox.SettingComboBox(cbTrav1AbsLocation, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav1RightPosition, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav1LimitSwitch, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbTrav1NoneLoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav1NoneLoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav1NoneLoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbTrav1LoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav1LoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav1LoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbTrav1NoneLoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1NoneLoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1NoneLoadAcceleration, "", false, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1LoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1LoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav1LoadAcceleration, "", false, TypeFlag.fltFlag);
 
 
 
 
             // Trav2 기능 그룹
-            cs_ComboBox.ChangeToTextBox(cbTrav2InverterKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbTrav2InverterA, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbTrav2BrakeResistorKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbTrav2BrakeResistorOhm, TypeFlag.fltFlag, 10, "실수 기입", "Ω");
-            cs_ComboBox.ChangeToTextBox(cbTrav2PowerCable, TypeFlag.fltFlag, 10, "실수 기입", "SQ");
-            cs_ComboBox.ChangeToTextBox(cbTrav2MccbSpec, TypeFlag.strFlag, 6, "텍스트 기입", "");
+            cs_ComboBox.SettingComboBox(cbTrav2InverterKw, "kW", true);
+            cs_ComboBox.SettingComboBox(cbTrav2InverterA, "A", true);
+            cs_ComboBox.ChangeToTextBox(cbTrav2BrakeResistorKw, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2BrakeResistorOhm, "Ω", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbTrav2PowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbTrav2MccbSpec, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbTrav2OutPut, TypeFlag.fltFlag, 10, "실수 기입", "kW");
-            cs_ComboBox.ChangeToTextBox(cbTrav2Speed, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav2GearRatio, TypeFlag.fltFlag, 10, "실수 기입", "i");
-            cs_ComboBox.ChangeToTextBox(cbTrav2RatedCurrent, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbTrav2BkVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.SettingComboBox(cbTrav2BrakeOption, "-");
-            cs_ComboBox.SettingComboBox(cbTrav2MotorSpec, "-");
-            cs_ComboBox.SettingComboBox(cbTrav2MotorMaker, "-");
-            cs_ComboBox.SettingComboBox(cbTrav2MotorMethod, "-");
-            cs_ComboBox.ChangeToTextBox(cbTrav2MotorType, TypeFlag.strFlag, 10, "텍스트 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbTrav2MotorVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.ChangeToTextBox(cbTrav2MotorHz, TypeFlag.fltFlag, 10, "실수 기입", "Hz");
-            cs_ComboBox.ChangeToTextBox(cbTrav2MotorEncoderSpec, TypeFlag.strFlag, 10, "텍스트 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbTrav2OutPut, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2Speed, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2GearRatio, "i", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2RatedCurrent, "A", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2BkVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbTrav2BrakeOption, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav2MotorSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav2MotorMaker, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav2MotorMethod, "-", false);
+            cs_ComboBox.ChangeToTextBox(cbTrav2MotorType, "텍스트 기입", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2MotorVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2MotorHz, "Hz", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2MotorEncoderSpec, "텍스트 기입", false, TypeFlag.strFlag);
 
-            cs_ComboBox.SettingComboBox(cbTrav2AbsLocation, "-");
-            cs_ComboBox.SettingComboBox(cbTrav2RightPosition, "-");
-            cs_ComboBox.SettingComboBox(cbTrav2LimitSwitch, "-");
+            cs_ComboBox.SettingComboBox(cbTrav2AbsLocation, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav2RightPosition, "-", false);
+            cs_ComboBox.SettingComboBox(cbTrav2LimitSwitch, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbTrav2NoneLoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav2NoneLoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav2NoneLoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbTrav2LoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav2LoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbTrav2LoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbTrav2NoneLoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2NoneLoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2NoneLoadAcceleration, "", false, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2LoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2LoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbTrav2LoadAcceleration, "", false, TypeFlag.fltFlag);
 
 
 
             // FORK1 기능 그룹
-            cs_ComboBox.ChangeToTextBox(cbFork1InverterKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbFork1InverterA, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbFork1BrakeResistorKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbFork1BrakeResistorOhm, TypeFlag.fltFlag, 10, "실수 기입", "Ω");
-            cs_ComboBox.ChangeToTextBox(cbFork1PowerCable, TypeFlag.fltFlag, 10, "실수 기입", "SQ");
-            cs_ComboBox.ChangeToTextBox(cbFork1MccbSpec, TypeFlag.strFlag, 6, "텍스트 기입", "");
+            cs_ComboBox.SettingComboBox(cbFork1InverterKw, "kW", true);
+            cs_ComboBox.SettingComboBox(cbFork1InverterA, "A", true);
+            cs_ComboBox.ChangeToTextBox(cbFork1BrakeResistorKw, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1BrakeResistorOhm, "Ω", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbFork1PowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbFork1MccbSpec, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbFork1OutPut, TypeFlag.fltFlag, 10, "실수 기입", "kW");
-            cs_ComboBox.ChangeToTextBox(cbFork1Speed, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbFork1GearRatio, TypeFlag.fltFlag, 10, "실수 기입", "i");
-            cs_ComboBox.ChangeToTextBox(cbFork1RatedCurrent, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbFork1BkVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.SettingComboBox(cbFork1BrakeOption, "-");
-            cs_ComboBox.SettingComboBox(cbFork1MotorSpec, "-");
-            cs_ComboBox.SettingComboBox(cbFork1MotorMaker, "-");
-            cs_ComboBox.SettingComboBox(cbFork1MotorMethod, "-");
-            cs_ComboBox.ChangeToTextBox(cbFork1MotorType, TypeFlag.strFlag, 10, "텍스트 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbFork1MotorVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.ChangeToTextBox(cbFork1MotorHz, TypeFlag.fltFlag, 10, "실수 기입", "Hz");
-            cs_ComboBox.ChangeToTextBox(cbFork1MotorEncoderSpec, TypeFlag.strFlag, 10, "텍스트 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbFork1OutPut, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1Speed, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1GearRatio, "i", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1RatedCurrent, "A", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1BkVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbFork1BrakeOption, "-", false);
+            cs_ComboBox.SettingComboBox(cbFork1MotorSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbFork1MotorMaker, "-", false);
+            cs_ComboBox.SettingComboBox(cbFork1MotorMethod, "-", false);
+            cs_ComboBox.ChangeToTextBox(cbFork1MotorType, "텍스트 기입", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1MotorVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1MotorHz, "Hz", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1MotorEncoderSpec, "텍스트 기입", false, TypeFlag.strFlag);
 
-            cs_ComboBox.SettingComboBox(cbFork1RightPosition, "-");
+            cs_ComboBox.SettingComboBox(cbFork1RightPosition, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbFork1NoneLoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbFork1NoneLoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbFork1NoneLoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbFork1LoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbFork1LoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbFork1LoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbFork1NoneLoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1NoneLoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1NoneLoadAcceleration, "", false, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1LoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1LoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork1LoadAcceleration, "", false, TypeFlag.fltFlag);
 
             // FORK2 기능 그룹
-            // ChangeToTextBox 호출
-            cs_ComboBox.ChangeToTextBox(cbFork2InverterKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbFork2InverterA, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbFork2BrakeResistorKw, TypeFlag.fltFlag, 10, "실수 기입", "Kw");
-            cs_ComboBox.ChangeToTextBox(cbFork2BrakeResistorOhm, TypeFlag.fltFlag, 10, "실수 기입", "Ω");
-            cs_ComboBox.ChangeToTextBox(cbFork2PowerCable, TypeFlag.fltFlag, 10, "실수 기입", "SQ");
-            cs_ComboBox.ChangeToTextBox(cbFork2MccbSpec, TypeFlag.strFlag, 6, "텍스트 기입", "" );
+            cs_ComboBox.SettingComboBox(cbFork2InverterKw, "kW", true);
+            cs_ComboBox.SettingComboBox(cbFork2InverterA, "A", true);
+            cs_ComboBox.ChangeToTextBox(cbFork2BrakeResistorKw, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2BrakeResistorOhm, "Ω", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbFork2PowerCable, "SQ", true);
+            cs_ComboBox.SettingComboBox(cbFork2MccbSpec, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbFork2OutPut, TypeFlag.fltFlag, 10, "실수 기입", "kW");
-            cs_ComboBox.ChangeToTextBox(cbFork2Speed, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbFork2GearRatio, TypeFlag.fltFlag, 10, "실수 기입", "i");
-            cs_ComboBox.ChangeToTextBox(cbFork2RatedCurrent, TypeFlag.fltFlag, 10, "실수 기입", "A");
-            cs_ComboBox.ChangeToTextBox(cbFork2BkVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.SettingComboBox(cbFork2BrakeOption, "-");
-            cs_ComboBox.SettingComboBox(cbFork2MotorSpec, "-");
-            cs_ComboBox.SettingComboBox(cbFork2MotorMaker, "-");
-            cs_ComboBox.SettingComboBox(cbFork2MotorMethod, "-");
-            cs_ComboBox.ChangeToTextBox(cbFork2MotorType, TypeFlag.strFlag, 10, "텍스트 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbFork2MotorVoltage, TypeFlag.fltFlag, 10, "실수 기입", "V");
-            cs_ComboBox.ChangeToTextBox(cbFork2MotorHz, TypeFlag.fltFlag, 10, "실수 기입", "Hz");
-            cs_ComboBox.ChangeToTextBox(cbFork2MotorEncoderSpec, TypeFlag.strFlag, 10, "텍스트 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbFork2OutPut, "kW", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2Speed, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2GearRatio, "i", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2RatedCurrent, "A", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2BkVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.SettingComboBox(cbFork2BrakeOption, "-", false);
+            cs_ComboBox.SettingComboBox(cbFork2MotorSpec, "-", false);
+            cs_ComboBox.SettingComboBox(cbFork2MotorMaker, "-", false);
+            cs_ComboBox.SettingComboBox(cbFork2MotorMethod, "-", false);
+            cs_ComboBox.ChangeToTextBox(cbFork2MotorType, "텍스트 기입", false, TypeFlag.strFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2MotorVoltage, "V", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2MotorHz, "Hz", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2MotorEncoderSpec, "텍스트 기입", false, TypeFlag.strFlag);
 
-            cs_ComboBox.SettingComboBox(cbFork2RightPosition, "-");
+            cs_ComboBox.SettingComboBox(cbFork2RightPosition, "-", false);
 
-            cs_ComboBox.ChangeToTextBox(cbFork2NoneLoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbFork2NoneLoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbFork2NoneLoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
-            cs_ComboBox.ChangeToTextBox(cbFork2LoadHighSpeed, TypeFlag.fltFlag, 10, "실수 기입", "MPM");
-            cs_ComboBox.ChangeToTextBox(cbFork2LoadRotationNum, TypeFlag.fltFlag, 10, "실수 기입", "RPM");
-            cs_ComboBox.ChangeToTextBox(cbFork2LoadAcceleration, TypeFlag.fltFlag, 10, "실수 기입", "");
+            cs_ComboBox.ChangeToTextBox(cbFork2NoneLoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2NoneLoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2NoneLoadAcceleration, "", false, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2LoadHighSpeed, "MPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2LoadRotationNum, "RPM", true, TypeFlag.fltFlag);
+            cs_ComboBox.ChangeToTextBox(cbFork2LoadAcceleration, "", false, TypeFlag.fltFlag);
 
             // CARR 기능 그룹
             // SettingComboBox 호출
-            cs_ComboBox.SettingComboBox(cbCarrSensor, "-");
-            cs_ComboBox.SettingComboBox(cbCarrDoubleInput, "-");
+            cs_ComboBox.SettingComboBox(cbCarrSensor, "-", false);
+            cs_ComboBox.SettingComboBox(cbCarrDoubleInput, "-", false);
 
 
 
@@ -543,7 +547,7 @@ namespace MCNS_STANDALONE
             {
                 { "ELEQ_파워", new Control[] { cbEleqMccbModel, cbEleqSmpsModel, cbEleqCableModel, cbEleqHubModel, 
                     cbEleqPowerKw, cbEleqPowerA, cbEleqBrakeResistorKw, cbEleqBrakeResistorOhm, 
-                    cbEleqPowerCable, cbEleqMccbSpec, cbEleqFanQuantity, cbEleqTerminal, 
+                    cbEleqMainPowerCable, cbEleqMainMccbSpec, cbEleqFanQuantity, cbEleqTerminal, 
                     cbEleqPanel, cbEleqHmi, cbEleqOpt, cbEleqTowerLamp, 
                     cbEleqSafety, cbEleqSafetyQuantity} },
                 { "ELEQ_센서", new Control[] { cbEleqSensorType, cbEleqModem, 
@@ -870,7 +874,7 @@ namespace MCNS_STANDALONE
                                         {
 
                                             cb.Focus();
-                                            string text = cb.BackColor == System.Drawing.Color.White ? cb.Text : null;
+                                            string text = cb.BackColor == System.Drawing.Color.White ? cb.EditValue?.ToString() : null;
                                             string labelText = cb.Parent.Controls.OfType<LabelControl>().FirstOrDefault()?.Text ?? "No Label";
 
                                             return new XElement("ComboBox",
@@ -1818,11 +1822,11 @@ namespace MCNS_STANDALONE
                 cbEleqParts.SelectedIndex = -1;
                 cbEleqPoint.SelectedIndex = -1;
 
-                cs_ComboBox.SettingComboBox(cbEleqLocation, "-");
-                cs_ComboBox.SettingComboBox(cbEleqType, "-");
-                cs_ComboBox.SettingComboBox(cbEleqDt, "-");
-                cs_ComboBox.SettingComboBox(cbEleqParts, "-");
-                cs_ComboBox.SettingComboBox(cbEleqPoint, "-");
+                cs_ComboBox.SettingComboBox(cbEleqLocation, "-", false);
+                cs_ComboBox.SettingComboBox(cbEleqType, "-", false);
+                cs_ComboBox.SettingComboBox(cbEleqDt, "-", false);
+                cs_ComboBox.SettingComboBox(cbEleqParts, "-", false);
+                cs_ComboBox.SettingComboBox(cbEleqPoint, "-", false);
 
                 // 기본 LOCATION, TYPE, POINT 값 추가
                 cbEleqLocation.Properties.Items.AddRange(new string[] { "MP", "SB" });
@@ -2381,12 +2385,16 @@ namespace MCNS_STANDALONE
             excelMccbDt.Clear();
             excelMccbDt.Columns.Clear(); // 컬럼도 제거하여 중복 방지
 
+
             try
             {
                 // Excel 파일 열기
                 using (var workbook = new XLWorkbook(CS_PathData.MccbFilePath))
                 {
-                    foreach (var worksheet in workbook.Worksheets) // 모든 워크시트 반복
+                    // 특정 워크시트 선택
+                    var worksheet = workbook.Worksheet("차단기");
+
+                    if (worksheet != null) // 워크시트가 존재하는 경우만 실행
                     {
                         // 첫 번째 행에서 컬럼명 읽기 (중복 컬럼명 방지)
                         if (excelMccbDt.Columns.Count == 0)
@@ -2421,6 +2429,146 @@ namespace MCNS_STANDALONE
             {
 
             }
+
+            Control[] ctrls = { ckbPRJdomestic, ckbPRJoverseas, cbMSPinverterMaker, cbMSPinverterSpec, cbEleqMccbModel };
+            ComboBoxEdit[] liftCtrls = { cbLiftInverterKw, cbLiftInverterA, cbLiftPowerCable, cbLiftMccbSpec, cbLiftOutPut };
+            ComboBoxEdit[] trav1Ctrls = { cbTrav1InverterKw, cbTrav1InverterA, cbTrav1PowerCable, cbTrav1MccbSpec, cbTrav1OutPut };
+            ComboBoxEdit[] trav2Ctrls = { cbTrav2InverterKw, cbTrav2InverterA, cbTrav2PowerCable, cbTrav2MccbSpec, cbTrav2OutPut };
+            ComboBoxEdit[] fork1Ctrls = { cbFork1InverterKw, cbFork1InverterA, cbFork1PowerCable, cbFork1MccbSpec, cbFork1OutPut };
+            ComboBoxEdit[] fork2Ctrls = { cbFork2InverterKw, cbFork2InverterA, cbFork2PowerCable, cbFork2MccbSpec, cbFork2OutPut };
+
+            void InverterSelect(Control[] controls, ComboBoxEdit[] funcControls)
+            {
+                string strPrjTarget = "";
+                string strInverterMaker = "";
+                string strInverterSpec = "";
+                string strEleqMccbModel = "";
+
+                string strInverterKw = "";
+                string strInverterA = "";
+                string strPowerCable = "";
+                string strMccbSpec = "";
+                string strOutPut = "";
+
+                
+                foreach (Control ctrl in controls)
+                {
+                    if(ctrl is CheckEdit ckb)
+                    {
+                        ckb.CheckedChanged += (o, e) =>
+                        {
+                            strPrjTarget = ckbPRJdomestic.Checked ? ckbPRJdomestic.Text : ckbPRJoverseas.Checked ? ckbPRJoverseas.Text : string.Empty;
+                            strInverterMaker = cbMSPinverterMaker.Text;
+                            strInverterSpec = cbMSPinverterSpec.Text;
+                            strEleqMccbModel = cbEleqMccbModel.Text;
+
+                            foreach (ComboBoxEdit funcCtrl in funcControls)
+                            {
+                                funcCtrl.SelectedIndex = -1;
+
+                                List<string> listInverterKw = excelMccbDt.AsEnumerable()
+                                .Where(row => row.Field<string>("타겟") == strPrjTarget &&
+                                        row.Field<string>("인버터 제조사") == strInverterMaker &&
+                                        row.Field<string>("인버터") == strInverterSpec &&
+                                        row.Field<string>("차단기 제조사") == strEleqMccbModel)
+                                .Select(row => row.Field<string>("인버터 용량(Kw)"))
+                                .Distinct()
+                                .ToList();
+
+                                funcControls[0].Properties.Items.Clear();
+                                funcControls[0].Properties.Items.AddRange(listInverterKw);
+                            }
+
+                        };
+                    }
+                    else if(ctrl is ComboBoxEdit cb)
+                    {
+                        cb.TextChanged += (o, e) =>
+                        {
+                            strPrjTarget = ckbPRJdomestic.Checked ? ckbPRJdomestic.Text : ckbPRJoverseas.Checked ? ckbPRJoverseas.Text : string.Empty;
+                            strInverterMaker = cbMSPinverterMaker.Text;
+                            strInverterSpec = cbMSPinverterSpec.Text;
+                            strEleqMccbModel = cbEleqMccbModel.Text;
+                            
+                            foreach(ComboBoxEdit funcCtrl in funcControls)
+                            {
+
+                                List<string> listInverterKw = excelMccbDt.AsEnumerable()
+                                .Where(row => row.Field<string>("타겟") == strPrjTarget &&
+                                        row.Field<string>("인버터 제조사") == strInverterMaker &&
+                                        row.Field<string>("인버터") == strInverterSpec &&
+                                        row.Field<string>("차단기 제조사") == strEleqMccbModel)
+                                .Select(row => row.Field<string>("인버터 용량(Kw)"))
+                                .Distinct()
+                                .ToList();
+
+                                funcControls[0].Properties.Items.Clear();
+                                funcControls[0].Properties.Items.AddRange(listInverterKw);
+                            }
+                        };
+                    }
+                }
+
+                funcControls[0].TextChanged += (o, e) =>
+                {
+                    strInverterKw = funcControls[0].Text;
+                    
+                    List<string> listInverterA = excelMccbDt.AsEnumerable()
+                            .Where(row => row.Field<string>("타겟") == strPrjTarget &&
+                                    row.Field<string>("인버터 제조사") == strInverterMaker &&
+                                    row.Field<string>("인버터") == strInverterSpec &&
+                                    row.Field<string>("차단기 제조사") == strEleqMccbModel &&
+                                    row.Field<string>("인버터 용량(Kw)") == strInverterKw)
+                            .Select(row => row.Field<string>("인버터 용량(A)"))
+                            .Distinct()
+                            .ToList();
+
+                    funcControls[1].Properties.Items.Clear();
+                    funcControls[1].Properties.Items.AddRange(listInverterA);
+                    funcControls[1].SelectedIndex = 0;
+                    strInverterA = funcControls[1].EditValue?.ToString();
+                    
+                    List<string> listPowerCable = excelMccbDt.AsEnumerable()
+                            .Where(row => row.Field<string>("타겟") == strPrjTarget &&
+                                    row.Field<string>("인버터 제조사") == strInverterMaker &&
+                                    row.Field<string>("인버터") == strInverterSpec &&
+                                    row.Field<string>("차단기 제조사") == strEleqMccbModel &&
+                                    row.Field<string>("인버터 용량(Kw)") == strInverterKw &&
+                                    row.Field<string>("인버터 용량(A)") == strInverterA)
+                            .Select(row => row.Field<string>("Power Cable(SQ)"))
+                            .Distinct()
+                            .ToList();
+
+                    funcControls[2].Properties.Items.Clear();
+                    funcControls[2].Properties.Items.AddRange(listPowerCable);
+                    funcControls[2].SelectedIndex = 0;
+                    strPowerCable = funcControls[2].EditValue?.ToString();
+
+                    List<string> listMccbSpec = excelMccbDt.AsEnumerable()
+                            .Where(row => row.Field<string>("타겟") == strPrjTarget &&
+                                    row.Field<string>("인버터 제조사") == strInverterMaker &&
+                                    row.Field<string>("인버터") == strInverterSpec &&
+                                    row.Field<string>("차단기 제조사") == strEleqMccbModel &&
+                                    row.Field<string>("인버터 용량(Kw)") == strInverterKw &&
+                                    row.Field<string>("인버터 용량(A)") == strInverterA &&
+                                    row.Field<string>("Power Cable(SQ)") == strPowerCable)
+                            .Select(row => row.Field<string>("MCCB사양"))
+                            .Distinct()
+                            .ToList();
+
+                    funcControls[3].Properties.Items.Clear();
+                    funcControls[3].Properties.Items.AddRange(listMccbSpec);
+                    funcControls[3].SelectedIndex = 0;
+                    
+                };
+            }
+
+
+            InverterSelect(ctrls, liftCtrls);
+            InverterSelect(ctrls, trav1Ctrls);
+            InverterSelect(ctrls, trav2Ctrls);
+            InverterSelect(ctrls, fork1Ctrls);
+            InverterSelect(ctrls, fork2Ctrls);
         }
 
         /*
@@ -2654,10 +2802,7 @@ namespace MCNS_STANDALONE
         */
         private void Interlock()
         {
-            simpleButton1.Click += (o, e) => 
-            {
-                LoadMccbFromExcel();
-            };
+            
 
             interLock.UpdateFullText(
                 cbMODfullName,
@@ -3169,59 +3314,45 @@ namespace MCNS_STANDALONE
                 }
             }
 
-            InverterSpecTextChanged();
-            cbMSPinverterSpec.TextChanged += (o, e) =>
-            {
-                InverterSpecTextChanged();
-            };
-            void InverterSpecTextChanged () 
-            {
-                ComboBoxEdit[] cbModular = { cbEleqPowerKw, cbEleqPowerA, cbEleqBrakeResistorKw, cbEleqBrakeResistorOhm };
-                ComboBoxEdit[] cbSystem =
+            ComboBoxEdit[] cbModular = { cbEleqPowerKw, cbEleqPowerA, cbEleqBrakeResistorKw, cbEleqBrakeResistorOhm, cbEleqMccbSpec,cbEleqPowerCable };
+            ComboBoxEdit[] cbSystem =
                 {
                     cbLiftBrakeResistorKw, cbLiftBrakeResistorOhm, cbLiftMccbSpec,
                     cbTrav1BrakeResistorKw, cbTrav1BrakeResistorOhm, cbTrav1MccbSpec,
                     cbTrav2BrakeResistorKw, cbTrav2BrakeResistorOhm, cbTrav2MccbSpec,
                     cbFork1BrakeResistorKw, cbFork1BrakeResistorOhm, cbFork1MccbSpec,
-                    cbFork2BrakeResistorKw, cbFork2BrakeResistorOhm, cbFork2MccbSpec,
+                    cbFork2BrakeResistorKw, cbFork2BrakeResistorOhm, cbFork2MccbSpec
                 };
-
+            cbMSPinverterSpec.TextChanged += (o, e) => InverterSpecTextChanged();
+            InverterSpecTextChanged();
+            void InverterSpecTextChanged()
+            {
                 if (cbMSPinverterSpec.Text == "MODULAR")
                 {
-                    foreach (ComboBoxEdit cb in cbModular)
-                    {
-                        cb.SelectedIndex = -1;
-                        cb.Enabled = true;
-                        cb.BackColor = Color.LightGray;
-                        cb.ForeColor = Color.Gray;
-                    }
                     foreach (ComboBoxEdit cb in cbSystem)
                     {
-                        cb.SelectedIndex = -1;
                         cb.Enabled = false;
-                        cb.BackColor = Color.LightCoral;
-                        cb.ForeColor = Color.Gray;
+                    }
+                    foreach (ComboBoxEdit cb in cbModular)
+                    {
+                        cb.Enabled = true;
+
                     }
                 }
-                else
+                else if (cbMSPinverterSpec.Text == "SYSTEM")
                 {
-                    foreach (ComboBoxEdit cb in cbSystem)
-                    {
-                        cb.SelectedIndex = -1;
-                        cb.Enabled = true;
-                        cb.BackColor = Color.LightGray;
-                        cb.ForeColor = Color.Gray;
-                    }
                     foreach (ComboBoxEdit cb in cbModular)
                     {
-                        cb.SelectedIndex = -1;
                         cb.Enabled = false;
-                        cb.BackColor = Color.LightCoral;
-                        cb.ForeColor = Color.Gray;
+                    }
+                    foreach (ComboBoxEdit cb in cbSystem)
+                    {
+                        cb.Enabled = true;
+
                     }
                 }
             }
-
+            
         }
 
         private void UpdateComboBoxItemList()

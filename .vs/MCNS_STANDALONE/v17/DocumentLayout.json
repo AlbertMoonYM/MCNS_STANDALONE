@@ -3,16 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\mcns_standalone\\03.ui\\formconfigpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconfigpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\mcns_standalone\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\mcns_standalone\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\mcns_standalone\\03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconceptsheet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F96F828-E7A2-4466-B483-E4CD384F6FE0}|..\\Eplan.MCNS.Lib\\Eplan.MCNS.Lib.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\eplan.mcns.lib\\ui cs\\cs_combobox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.ui\\formconfigpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D6642D6E-0C81-4889-9CCD-22A9F34074EE}|MCNS_STANDALONE.csproj|solutionrelative:03.ui\\formconfigpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F96F828-E7A2-4466-B483-E4CD384F6FE0}|..\\Eplan.MCNS.Lib\\Eplan.MCNS.Lib.csproj|c:\\users\\kr70009769\\desktop\\01.task\\02. api \uC18C\uC2A4\\03. c#\\eplan.mcns.lib\\ui cs\\cs_staticstring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,19 +28,55 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CS_ComboBox.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\Eplan.MCNS.Lib\\UI CS\\CS_ComboBox.cs",
+              "RelativeDocumentMoniker": "..\\Eplan.MCNS.Lib\\UI CS\\CS_ComboBox.cs",
+              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\Eplan.MCNS.Lib\\UI CS\\CS_ComboBox.cs",
+              "RelativeToolTip": "..\\Eplan.MCNS.Lib\\UI CS\\CS_ComboBox.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwB4AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T12:43:51.513Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FormConceptSheet.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
+              "RelativeDocumentMoniker": "03.UI\\FormConceptSheet.cs",
+              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
+              "RelativeToolTip": "03.UI\\FormConceptSheet.cs",
+              "ViewState": "AgIAADMLAAAAAAAAAAAQwAkNAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T07:51:33.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CS_StaticString.cs",
+              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\Eplan.MCNS.Lib\\UI CS\\CS_StaticString.cs",
+              "RelativeDocumentMoniker": "..\\Eplan.MCNS.Lib\\UI CS\\CS_StaticString.cs",
+              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\Eplan.MCNS.Lib\\UI CS\\CS_StaticString.cs",
+              "RelativeToolTip": "..\\Eplan.MCNS.Lib\\UI CS\\CS_StaticString.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T10:55:20.61Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "FormConfigPage.cs [\uB514\uC790\uC778]",
               "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConfigPage.cs",
               "RelativeDocumentMoniker": "03.UI\\FormConfigPage.cs",
               "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConfigPage.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "03.UI\\FormConfigPage.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T08:30:10.029Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2025-02-06T08:30:10.029Z"
             },
             {
               "$type": "Document",
@@ -45,21 +87,7 @@
               "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "03.UI\\FormConceptSheet.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T08:11:25.71Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FormConceptSheet.cs",
-              "DocumentMoniker": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
-              "RelativeDocumentMoniker": "03.UI\\FormConceptSheet.cs",
-              "ToolTip": "C:\\Users\\kr70009769\\Desktop\\01.Task\\02. API \uC18C\uC2A4\\03. C#\\MCNS_STANDALONE\\03.UI\\FormConceptSheet.cs",
-              "RelativeToolTip": "03.UI\\FormConceptSheet.cs",
-              "ViewState": "AgIAAFoJAAAAAAAAAAAswHYJAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T07:51:33.073Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-06T08:11:25.71Z"
             }
           ]
         }
